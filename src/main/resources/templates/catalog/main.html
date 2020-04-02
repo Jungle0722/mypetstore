@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen" />
+</head>
+<body>
+    <div th:replace="common/top">
+
+    </div>
+        <div id="Content">
+            <div id="Welcome">
+                <div id="WelcomeContent">
+                    Welcome to MyPetStore!
+                </div>
+            </div>
+            <script src="js/jquery-3.3.1.js"></script>
+
+            <script type="text/javascript">
+
+                $("a").mouseover(function() {
+                    var never = $("<p class='never'><a href='#'>AV-CB-01</a><br> <a href='#'>AV-CB-02</a></p>");
+                    var category = $(this).text();
+                    sendRequest("stand?categoryid="+category);
+                    //console.log("The",productid);
+                    $(this).after(never);
+                }).mouseout(function(){
+                    $("p.never").hide();
+                });
+
+                var xmlHttpRequest;
+                function createXMLHttpRequest(){
+                    if(window.xmlHttpRequest){
+                        xmlHttpRequest = new XMLHttpRequest();
+                    }
+                    else if(window.ActiveXObject){
+                        xmlHttpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+                    }
+                    else{
+                        xmlHttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                }
+
+
+
+
+                function sendRequest(url){
+                    createXMLHttpRequest();
+                    xmlHttpRequest.open("get",url,true);
+                    xmlHttpRequest.onreadystatechange=processResponse();
+                    xmlHttpRequest.send(null);
+                }
+
+                function processResponse() {
+                    if (xmlHttpRequest.readyState == 4) {
+                        if (xmlHttpRequest.status == 200) {
+                            //通过后台传递过来的参数用他来接收
+                            var never = $("<p class='never'></p>");
+
+                            $("div#SidebarContent").after(never);
+
+                        }
+                    }
+                }
+            </script>
+            <div id="Main">
+                <div id="Sidebar">
+                    <div id="SidebarContent">
+                        <a href="viewCategory?categoryId=FISH&parameter1=FISH"><img src="../images/fish_icon.gif" /></a>
+                        <br/> Saltwater, Freshwater <br/>
+                        <a href="viewCategory?categoryId=DOGS&parameter1=DOGS"><img src="../images/dogs_icon.gif" /></a>
+                        <br /> Various Breeds <br />
+                        <a href="viewCategory?categoryId=CATS&&parameter1=CATS"><img src="../images/cats_icon.gif" /></a>
+                        <br /> Various Breeds, Exotic Varieties <br />
+                        <a href="viewCategory?categoryId=REPTILES&&parameter1=REPTILES"><img src="../images/reptiles_icon.gif" /></a>
+                        <br /> Lizards, Turtles, Snakes <br />
+                        <a href="viewCategory?categoryId=BIRDS&parameter1=BIRDS"><img src="../images/birds_icon.gif" /></a>
+                        <br /> Exotic Varieties
+                    </div>
+                </div>
+
+                <div id="MainImage">
+                    <div id="MainImageContent">
+                        <map name="estoremap">
+                            <area alt="Birds" coords="72,2,280,250" href="viewCategory?categoryId=BIRDS" shape="rect" />
+                            <area alt="Fish" coords="2,180,72,250" href="viewCategory?categoryId=FISH" shape="rect" />
+                            <area alt="Dogs" coords="60,250,130,320" href="viewCategory?categoryId=DOGS" shape="rect" />
+                            <area alt="Reptiles" coords="140,270,210,340" href="viewCategory?categoryId=REPTILES" shape="rect" />
+                            <area alt="Cats" coords="225,240,295,310" href="viewCategory?categoryId=CATS" shape="rect" />
+                            <area alt="Birds" coords="280,180,350,250" href="viewCategory?categoryId=BIRDS" shape="rect" />
+                        </map>
+                        <img height="355" src="../images/splash.gif" align="middle" usemap="#estoremap" width="350" />
+                    </div>
+                </div>
+                <div id="Separator">&nbsp;</div>
+            </div>
+        </div>
+    <div th:replace="common/bottom">
+
+    </div>
+
+</body>
+</html>

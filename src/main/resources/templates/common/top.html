@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen" />
+</head>
+<body>
+    <header th:fragment="header">
+        <div id="Header">
+
+            <div id="Logo">
+                <div id="LogoContent">
+                    <a href="main"><img src="../images/logo-topbar.gif" /></a>
+                </div>
+            </div>
+
+            <div id="Menu">
+                <div id="MenuContent">
+                    <a href="viewCart">
+                        <img align="middle" name="img_cart"src="../images/cart.gif" />
+                    </a>
+
+
+                    <img align="middle"src="../images/separator.gif" />
+                    <c:if test="${sessionScope.account==null}">
+                        <a href="viewSignOnForm" name="sign in" ><c:out value="Sign In"/></a>
+
+                    </c:if>
+
+                    <c:if test="${sessionScope.account!=null}">
+                        <a href="signOut"  name="sign on"><c:out value="Sign On"/></a>
+                        <img align="middle" src="../images/separator.gif" />
+                    </c:if>
+
+
+
+                    <c:if test="${sessionScope.account!=null}">
+                        <a href="viewEditAccountForm?username=${sessionScope.account.username}"  name="my account" ><c:out value="My Account"/></a>
+
+                    </c:if>
+
+                    <img align="middle"src="../images/separator.gif" />
+
+                    <a href="never">?</a>
+                </div>
+            </div>
+            <div id="Search">
+                <div id="SearchContent">
+
+                    <form action="searchProduct" method="post">
+                        <input type="text" id="keyword" name="keyword" size="14"/>
+                        <div class="auto hidden" id="auto">
+                            <div class="auto_out">1</div>
+                            <div class="auto_out">2</div>
+                        </div>
+                        <input type="submit" name="searchProducts" value="Search" />
+                        <script src="js/first.js"></script>
+                    </form>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div id="QuickLinks">
+                <a href="viewCategory?categoryId=FISH"  value="FISH"><img
+                        src="../images/sm_fish.gif" /></a> <img src="../images/separator.gif" />
+                <a href="viewCategory?categoryId=DOGS" name="DOGS"><img
+                        src="../images/sm_dogs.gif" /></a> <img src="../images/separator.gif" />
+                <a href="viewCategory?categoryId=REPTILES" name="REPTILES"><img
+                        src="../images/sm_reptiles.gif" /></a> <img
+                    src="../images/separator.gif" />
+                <a href="viewCategory?categoryId=CATS" name="CATS"><img
+                        src="../images/sm_cats.gif" /></a> <img src="../images/separator.gif" />
+                <a href="viewCategory?categoryId=BIRDS" name="BIRDS"><img
+                        src="../images/sm_birds.gif" /></a>
+            </div>
+
+        </div>
+
+    </header>
+</body>
+</html>

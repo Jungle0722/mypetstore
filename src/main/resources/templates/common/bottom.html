@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen" />
+</head>
+<body>
+    <footer th:fragment="footer">
+        <div id="Footer">
+
+            <div id="PoweredBy">&nbsp<a href="www.csu.edu.cn">www.csu.edu.cn</a>
+            </div>
+
+            <div id="Banner">
+                <c:if test="${sessionScope.account!=null}">
+
+                    <a href="viewCategory?${categoryId=sessionScope.account.favouriteCategoryId}">
+                        ${sessionScope.account.bannerName}
+                    </a>
+
+
+                </c:if>
+            </div>
+
+        </div>
+    </footer>
+</body>
+</html>
