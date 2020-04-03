@@ -11,34 +11,23 @@
 
             <div id="Logo">
                 <div id="LogoContent">
-                    <a href="main"><img src="../images/logo-topbar.gif" /></a>
+                    <a href="/catalog/view"><img src="../images/logo-topbar.gif" /></a>
                 </div>
             </div>
 
             <div id="Menu">
                 <div id="MenuContent">
-                    <a href="viewCart">
-                        <img align="middle" name="img_cart"src="../images/cart.gif" />
+                    <a href="/cart/viewCart">
+                    <img align="middle" name="img_cart"src="../images/cart.gif" />
                     </a>
 
-
                     <img align="middle"src="../images/separator.gif" />
-                    <c:if test="${sessionScope.account==null}">
-                        <a href="viewSignOnForm" name="sign in" ><c:out value="Sign In"/></a>
+                    <a th:if="${true}" href="viewSignOnForm">Sign In</a>
 
-                    </c:if>
+                    <a th:if="${flase}" href="signOut">Sign Out</a>
+                    <img th:if="${sessionScope.account!=null}" align="middle" src="../images/separator.gif"/>
 
-                    <c:if test="${sessionScope.account!=null}">
-                        <a href="signOut"  name="sign on"><c:out value="Sign On"/></a>
-                        <img align="middle" src="../images/separator.gif" />
-                    </c:if>
-
-
-
-                    <c:if test="${sessionScope.account!=null}">
-                        <a href="viewEditAccountForm?username=${sessionScope.account.username}"  name="my account" ><c:out value="My Account"/></a>
-
-                    </c:if>
+                    <a th:if="${sessionScope.account!=null}" href="viewEditAccountForm?username=${sessionScope.account.username}">My Account</a>
 
                     <img align="middle"src="../images/separator.gif" />
 

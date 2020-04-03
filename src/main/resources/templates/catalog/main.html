@@ -8,62 +8,14 @@
 <body>
     <div th:replace="common/top">
 
-    </div>
-        <div id="Content">
-            <div id="Welcome">
+            </div>
+                <div id="Content">
+                    <div id="Welcome">
                 <div id="WelcomeContent">
                     Welcome to MyPetStore!
                 </div>
             </div>
-            <script src="js/jquery-3.3.1.js"></script>
 
-            <script type="text/javascript">
-
-                $("a").mouseover(function() {
-                    var never = $("<p class='never'><a href='#'>AV-CB-01</a><br> <a href='#'>AV-CB-02</a></p>");
-                    var category = $(this).text();
-                    sendRequest("stand?categoryid="+category);
-                    //console.log("The",productid);
-                    $(this).after(never);
-                }).mouseout(function(){
-                    $("p.never").hide();
-                });
-
-                var xmlHttpRequest;
-                function createXMLHttpRequest(){
-                    if(window.xmlHttpRequest){
-                        xmlHttpRequest = new XMLHttpRequest();
-                    }
-                    else if(window.ActiveXObject){
-                        xmlHttpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-                    }
-                    else{
-                        xmlHttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                }
-
-
-
-
-                function sendRequest(url){
-                    createXMLHttpRequest();
-                    xmlHttpRequest.open("get",url,true);
-                    xmlHttpRequest.onreadystatechange=processResponse();
-                    xmlHttpRequest.send(null);
-                }
-
-                function processResponse() {
-                    if (xmlHttpRequest.readyState == 4) {
-                        if (xmlHttpRequest.status == 200) {
-                            //通过后台传递过来的参数用他来接收
-                            var never = $("<p class='never'></p>");
-
-                            $("div#SidebarContent").after(never);
-
-                        }
-                    }
-                }
-            </script>
             <div id="Main">
                 <div id="Sidebar">
                     <div id="SidebarContent">
@@ -83,7 +35,7 @@
                 <div id="MainImage">
                     <div id="MainImageContent">
                         <map name="estoremap">
-                            <area alt="Birds" coords="72,2,280,250" href="viewCategory?categoryId=BIRDS" shape="rect" />
+                            <area alt="Birds" coords="72,2,280,250" href="/catalog/viewCategory?categoryId=BIRDS" shape="rect" />
                             <area alt="Fish" coords="2,180,72,250" href="viewCategory?categoryId=FISH" shape="rect" />
                             <area alt="Dogs" coords="60,250,130,320" href="viewCategory?categoryId=DOGS" shape="rect" />
                             <area alt="Reptiles" coords="140,270,210,340" href="viewCategory?categoryId=REPTILES" shape="rect" />
