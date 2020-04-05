@@ -1,8 +1,9 @@
 package org.csu.mypetstore.controller;
 
-import org.csu.mypetstore.service.CartService;
+import org.csu.mypetstore.domain.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -10,17 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/cart")
 public class CartController {
 
+
+
     @Autowired
-    private CartService cartService;
+    private Cart cart;
+
+    private int numberOfItems;
 
     @GetMapping("/viewCart")
-    public String viewCart() {
-        // 检测是否有Account登录，如果已登录，就显示此Account的Cart，否则显示一个空的Cart
-        if (false) {
-            return null;
-        } else {
-            return "cart/cart";
-        }
+    public String viewCart(Model model) {
+        model.addAttribute("cart", cart);
+        model.addAttribute("cart.numberOfItems", cart.getNumberOfItems());
+        model.addAttribute("cart.cartItems", cart.getCartItems());
 
+        return "cart/cart";
     }
 }

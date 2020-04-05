@@ -11,4 +11,13 @@
         FROM CATEGORY
         WHERE CATID = #{categoryId}
     </select>
+
+<!--    这里结果类型误写成List<Category>但是实际上这个选择语句是从Category表中选择出一串Category，因此其返回类型为Category-->
+    <select id="getCategoryList" resultType="Category">
+        SELECT
+            CATID AS categoryId,
+        NAME,
+        DESCN AS description
+        FROM CATEGORY
+    </select>
 </mapper>

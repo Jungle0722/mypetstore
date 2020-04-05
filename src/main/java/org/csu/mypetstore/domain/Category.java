@@ -11,7 +11,7 @@ public class Category {
     }
 
     public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+        this.categoryId = categoryId.trim();
     }
 
     public String getName() {
@@ -28,5 +28,9 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String toString() {
+        return getCategoryId();
     }
 }

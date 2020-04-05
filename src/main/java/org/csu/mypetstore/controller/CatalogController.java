@@ -1,8 +1,8 @@
 package org.csu.mypetstore.controller;
 
-import org.csu.mypetstore.domain.Category;
-import org.csu.mypetstore.domain.Product;
+import org.csu.mypetstore.domain.*;
 import org.csu.mypetstore.service.CatalogService;
+import org.csu.mypetstore.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +18,13 @@ public class CatalogController {
     @Autowired
     private CatalogService catalogService;
 
+    @Autowired
+    private ItemService itemService;
+
     @GetMapping("/view")
-    public String view() {
+    public String view(Model model) {
+        // 每个用户刚进入页面时未登录，故account为空
+        model.addAttribute("account", null);
         return "catalog/main";
     }
 
@@ -33,5 +38,24 @@ public class CatalogController {
             return "catalog/category";
         }
         return "catalog/main";
+    }
+
+    @GetMapping("/viewProduct")
+    public String viewProduct(String productId, Model model) {
+        Product product = catalogService.getProduct(productId);
+        List<Item> itemList = itemService.getItemListByProduct(productId);
+        model.addAttribute("product", product);
+        model.addAttribute("itemList", itemList);
+        return "catalog/product";
+    }
+
+    @GetMapping("/viewItem")
+    private String viewItem(String itemId, Model model) {
+        Item item = itemService.getItem(itemId);
+        // model内的数据只能维持在一个页面？
+        Product product = item.getProduct();
+        model.addAttribute("item", item);
+        model.addAttribute("product", product);
+        return "catalog/item";
     }
 }

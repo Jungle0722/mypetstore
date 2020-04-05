@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen" />
+</head>
+<body>
+<div th:replace="common/top">
+
+</div>
+<div id="BackLink">
+    <a th:href="@{/catalog/viewCategory?categoryId=} + ${product.categoryId}">Return to <label th:text="${product.categoryId}"></label></a>
+</div>
+
+<div id="Catalog">
+
+    <h2>${product.name}</h2>
+
+    <table>
+        <tr>
+            <th>Item ID</th>
+            <th>Product ID</th>
+            <th>Description</th>
+            <th>List Price</th>
+            <th>&nbsp;</th>
+        </tr>
+
+        <tr th:each="item:${itemList}">
+            <td><a th:href="@{/catalog/viewItem?itemId=} + ${item.itemId}" th:text="${item.itemId}"></a></td>
+            <td th:text="${product.productId}"></td>
+            <td th:text="${item.attribute1} + ${item.attribute2} + ${item.attribute3} + ${item.attribute4} + ${item.attribute5} + ${product.name}"></td>
+            <td th:text="${item.listPrice}">listPrice</td>
+            <td><a class="Button" href="#">Add to Cart</a></td>
+        </tr>
+<!--                <td><a class="Button" href="addItemToCart?workingItemId=${item.itemId}">Add to Cart</a></td>-->
+        <tr>
+            <td>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+
+<div th:replace="common/bottom">
+
+</div>
+
+</body>
+</html>

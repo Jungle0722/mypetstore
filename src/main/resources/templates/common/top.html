@@ -22,12 +22,12 @@
                     </a>
 
                     <img align="middle"src="../images/separator.gif" />
-                    <a th:if="${true}" href="viewSignOnForm">Sign In</a>
+                    <a th:if="${account==null}" href="viewSignOnForm">Sign In</a>
 
-                    <a th:if="${flase}" href="signOut">Sign Out</a>
-                    <img th:if="${sessionScope.account!=null}" align="middle" src="../images/separator.gif"/>
+                    <a th:if="${account!=null}" href="signOut">Sign Out</a>
+                    <img th:if="${account!=null}" align="middle" src="../images/separator.gif"/>
 
-                    <a th:if="${sessionScope.account!=null}" href="viewEditAccountForm?username=${sessionScope.account.username}">My Account</a>
+                    <a th:if="${account!=null}" href="viewEditAccountForm?username=${account.username}">My Account</a>
 
                     <img align="middle"src="../images/separator.gif" />
 
@@ -38,13 +38,12 @@
                 <div id="SearchContent">
 
                     <form action="searchProduct" method="post">
-                        <input type="text" id="keyword" name="keyword" size="14"/>
-                        <div class="auto hidden" id="auto">
-                            <div class="auto_out">1</div>
-                            <div class="auto_out">2</div>
-                        </div>
+                        <input type="text" name="keyword" size="14"/>
+<!--                        <div class="auto hidden" id="auto">-->
+<!--                            <div class="auto_out">1</div>-->
+<!--                            <div class="auto_out">2</div>-->
+<!--                        </div>-->
                         <input type="submit" name="searchProducts" value="Search" />
-                        <script src="js/first.js"></script>
                     </form>
                 </div>
             </div>
@@ -56,16 +55,16 @@
 
 
             <div id="QuickLinks">
-                <a href="viewCategory?categoryId=FISH"  value="FISH"><img
+                <a href="/catalog/viewCategory?categoryId=FISH"  value="FISH"><img
                         src="../images/sm_fish.gif" /></a> <img src="../images/separator.gif" />
-                <a href="viewCategory?categoryId=DOGS" name="DOGS"><img
+                <a href="/catalog/viewCategory?categoryId=DOGS" name="DOGS"><img
                         src="../images/sm_dogs.gif" /></a> <img src="../images/separator.gif" />
-                <a href="viewCategory?categoryId=REPTILES" name="REPTILES"><img
+                <a href="/catalog/viewCategory?categoryId=REPTILES" name="REPTILES"><img
                         src="../images/sm_reptiles.gif" /></a> <img
                     src="../images/separator.gif" />
-                <a href="viewCategory?categoryId=CATS" name="CATS"><img
+                <a href="/catalog/viewCategory?categoryId=CATS" name="CATS"><img
                         src="../images/sm_cats.gif" /></a> <img src="../images/separator.gif" />
-                <a href="viewCategory?categoryId=BIRDS" name="BIRDS"><img
+                <a href="/catalog/viewCategory?categoryId=BIRDS" name="BIRDS"><img
                         src="../images/sm_birds.gif" /></a>
             </div>
 

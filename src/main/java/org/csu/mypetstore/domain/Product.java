@@ -12,7 +12,7 @@ public class Product {
     }
 
     public void setProductId(String productId) {
-        this.productId = productId;
+        this.productId = productId.trim();
     }
 
     public String getCategoryId() {
@@ -37,5 +37,9 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String toString() {
+        return getName();
     }
 }

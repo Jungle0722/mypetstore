@@ -12,4 +12,7 @@ public interface ProductMapper {
 
     // 通过商品id获取商品
     Product getProduct(String productId);
+
+    //通过一些关键字
+    List<Product> searchProductList(String keywords);
 }
