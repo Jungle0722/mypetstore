@@ -29,4 +29,8 @@ public class CatalogService {
     public Product getProduct(String productId) {
         return productMapper.getProduct(productId);
     }
+
+    public List<Product> searchProductByKeywords(String keywords) {
+        return productMapper.searchProductList(keywords);
+    }
 }

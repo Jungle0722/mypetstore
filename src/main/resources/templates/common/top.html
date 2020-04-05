@@ -22,22 +22,22 @@
                     </a>
 
                     <img align="middle"src="../images/separator.gif" />
-                    <a th:if="${account==null}" href="viewSignOnForm">Sign In</a>
+                    <a th:if="${session.account==null}" href="/account/viewSignOnForm">Sign In</a>
 
-                    <a th:if="${account!=null}" href="signOut">Sign Out</a>
-                    <img th:if="${account!=null}" align="middle" src="../images/separator.gif"/>
+                    <a th:if="${session.account!=null}" href="signOut">Sign Out</a>
+                    <img th:if="${session.account!=null}" align="middle" src="../images/separator.gif"/>
 
-                    <a th:if="${account!=null}" href="viewEditAccountForm?username=${account.username}">My Account</a>
+                    <a th:if="${session.account!=null}" href="viewEditaccountForm?username=${account.username}">My account</a>
 
                     <img align="middle"src="../images/separator.gif" />
 
-                    <a href="never">?</a>
+                    <a href="../help.html">?</a>
                 </div>
             </div>
             <div id="Search">
                 <div id="SearchContent">
 
-                    <form action="searchProduct" method="post">
+                    <form action="/catalog/searchProduct" method="post">
                         <input type="text" name="keyword" size="14"/>
 <!--                        <div class="auto hidden" id="auto">-->
 <!--                            <div class="auto_out">1</div>-->
