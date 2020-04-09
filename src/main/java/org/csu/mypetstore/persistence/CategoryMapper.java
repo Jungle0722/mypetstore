@@ -9,5 +9,7 @@ import java.util.List;
 public interface CategoryMapper {
 
     Category getCategory(String categoryId);
+
     List<Category> getCategoryList();
+
 }

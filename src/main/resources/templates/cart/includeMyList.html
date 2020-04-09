@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen" />
 </head>
 <body>
-    My List
+<!--    <div th:if="${account.myList != null}">-->
+<!--        <p>Pet Favorites <br />-->
+<!--            Shop for more of your favorite pets here.</p>-->
+<!--        <ul th:each="">-->
+<!--            <c:forEach var="product" items="${accountBean.myList}">-->
+<!--                <li><stripes:link-->
+<!--                        beanclass="org.mybatis.jpetstore.web.actions.CatalogActionBean"-->
+<!--                        event="viewProduct">-->
+<!--                    <stripes:param name="productId" value="${product.productId}" />-->
+<!--                    ${product.name}-->
+<!--                </stripes:link> (${product.productId})</li>-->
+<!--            </c:forEach>-->
+<!--        </ul>-->
+<!--    </div>-->
 </body>
 </html>

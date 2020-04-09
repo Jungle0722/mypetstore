@@ -62,8 +62,8 @@ public class CatalogController {
     }
 
     @PostMapping("searchProduct")
-    public String searchProduct(String keywords, Model model) {
-        List<Product> productList = catalogService.searchProductByKeywords(keywords);
+    public String searchProduct(String keyword, Model model) {
+        List<Product> productList = catalogService.searchProductList(keyword.toLowerCase());
         model.addAttribute("productList", productList);
         return "catalog/searchProduct";
     }

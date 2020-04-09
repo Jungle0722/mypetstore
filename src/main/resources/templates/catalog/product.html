@@ -29,9 +29,9 @@
         <tr th:each="item:${itemList}">
             <td><a th:href="@{/catalog/viewItem?itemId=} + ${item.itemId}" th:text="${item.itemId}"></a></td>
             <td th:text="${product.productId}"></td>
-            <td th:text="${item.attribute1} + ${item.attribute2} + ${item.attribute3} + ${item.attribute4} + ${item.attribute5} + ${product.name}"></td>
+            <td th:text="${item.attribute1} + ${product.name}"></td>
             <td th:text="${item.listPrice}">listPrice</td>
-            <td><a class="Button" href="#">Add to Cart</a></td>
+            <td><a class="Button" th:href="@{/cart/addItemToCart?itemId=} + ${item.itemId}">Add to Cart</a></td>
         </tr>
 <!--                <td><a class="Button" href="addItemToCart?workingItemId=${item.itemId}">Add to Cart</a></td>-->
         <tr>
