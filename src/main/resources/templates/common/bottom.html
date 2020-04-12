@@ -13,7 +13,7 @@
             </div>
 
 
-<!--            个人做一些小修改，让未登录的用户也可以得到一个随机推荐广告-->
+<!--            -->
             <div id="Banner">
                 <a th:if="${account!=null}"  href="viewCategory?${categoryId=sessionScope.account.favouriteCategoryId}" th:text="${account.favouriteCategoryId}">
                     你最爱的宠物

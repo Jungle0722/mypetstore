@@ -25,7 +25,7 @@
 <!--                    在controller层将account设为null，可是这里却依然判定其非空，故添加一个变量来强行转变-->
 <!--                    在测测试过程中发现，若将判断设为exit的ture，则无法显示sign in 故此处只能添加非 符号-->
 <!--                    因为一旦将account设为非空值后account将一直保持非空-->
-<!--                    故可设立两个sign in 一个在acocunt 空 时显示-->
+<!--                    故可设立两个sign in 一个在account 空 时显示-->
 <!--                    一个在account非空但退出账号后显示-->
                     <a th:if="${session.account} == null" href="/account/viewSignOnForm">Sign In</a>
 
@@ -34,7 +34,7 @@
                     <a th:if="(${session.account} !=null) and (${session.exit})" href="/account/viewSignOff">Sign Out</a>
                     <img th:if="(${session.account} !=null) and (${session.exit})" align="middle" src="../images/separator.gif"/>
 
-                    <a th:if="(${session.account} !=null) and (${session.exit})" href="viewEditaccountForm?username=${account.username}">My account</a>
+                    <a th:if="(${session.account} !=null) and (${session.exit})" th:href="@{viewEditAccount?username=} + ${session.username}">My account</a>
 
                     <img align="middle"src="../images/separator.gif" />
 
@@ -45,7 +45,7 @@
                 <div id="SearchContent">
 
                     <form action="/catalog/searchProduct" method="post">
-                        <input type="text" name="keyword" size="14"/>
+                        <input type="text" name="keyword" id="keyword" size="14"/>
 <!--                        <div class="auto hidden" id="auto">-->
 <!--                            <div class="auto_out">1</div>-->
 <!--                            <div class="auto_out">2</div>-->
