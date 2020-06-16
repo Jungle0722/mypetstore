@@ -8,7 +8,7 @@
 <body>
 <div th:replace="common/top"></div>
 
-<div id="BackLink"><a href="/catalog/view">Return to Main Menu</a></div>
+<div id="BackLink"><a href="/catalog/viewMain">Return to Main Menu</a></div>
 
 <div id="Catalog">
 
@@ -35,27 +35,28 @@
                 </tr>
 
                 <tr th:each="m:${cart.cartItems}">
-                    <td><a th:herf="@{/catalog/viewItem?itemId=} + ${m.item.itemId}" th:text="${m.item.itemId}"></a></td>
+                    <td><a th:href="@{/catalog/viewItem?itemId=} + ${m.item.itemId}" th:text="${m.item.itemId}">ItemID</a></td>
                 <td th:text="${m.item.product.productId}"></td>
                 <td th:text="${m.item.attribute1} + ${m.item.product.name}"></td>
                 <td th:text="${m.inStock}"></td>
                 <td ><input type="text" th:name="${m.item.itemId}" th:value="${m.quantity}"></td>
-                <td th:text="${m.item.listPrice}"></td>
-                <td th:text="${m.total}"></td>
-                <td><a th:href="@{/cart/removeItem?itemId=} + ${m.item.itemId}" th:text="Remove">移除</a></td>
+                <td th:text="@{$} + ${#numbers.formatDecimal(m.item.listPrice, 1, 2)}"></td>
+                <td th:text="@{$} + ${#numbers.formatDecimal(m.total, 1, 2)}"></td>
+                <td><a class="Button" th:href="@{/cart/removeItemFromCart?cartItem=} + ${m.item.itemId}" th:text="Remove">移除</a></td>
                 </tr>
 
                 <tr>
                     <td colspan="7">Sub Total:
-                        <input id="all" th:value="${cart.subTotal}"/>
-                              <input type="submit" value="Update Cart">
+                        <input id="all" th:value="${#numbers.formatDecimal(cart.subTotal, 1, 2)}"/>
+                              <input type="submit" name="updateCartQuantities" value="Update Cart">
                     </td>
                     <td>&nbsp;</td>
                 </tr>
             </table>
 
         </form>
-        <a th:if="${cart.numberOfItems > 0}" href="newOrderFrom?">Proceed to Checkout</a>
+        <a th:if="${cart.numberOfItems > 0} and ${session.account == null}" href="/order/accountError">Proceed to Checkout</a>
+        <a th:if="${cart.numberOfItems > 0} and ${session.account != null}" th:href="@{/order/newOrderForm?username=} + ${session.username} + @{&authenticated=} + ${session.authenticated}">Proceed to Checkout</a>
     </div>
     <div id="MyList">
         <div th:if="account != null" th:replace="cart/includeMyList"></div>

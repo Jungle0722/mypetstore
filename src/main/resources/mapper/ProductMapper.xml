@@ -8,7 +8,8 @@
             PRODUCTID,
             NAME,
             DESCN as description,
-            CATEGORY as categoryId
+            CATEGORY as categoryId,
+            IMG as img
         FROM PRODUCT
         WHERE PRODUCTID = #{productId}
     </select>
@@ -18,7 +19,8 @@
             PRODUCTID,
             NAME,
             DESCN as description,
-            CATEGORY as categoryId
+            CATEGORY as categoryId,
+            IMG as img
         FROM PRODUCT
         WHERE CATEGORY = #{value}
     </select>

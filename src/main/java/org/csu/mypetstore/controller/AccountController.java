@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/account")
-@SessionAttributes({"account", "exit" ,"username"})
+@SessionAttributes({"account", "authenticated" ,"username"})
 public class AccountController {
     // 因为用户登录之后登录的状态要一直保持到会话结束，所以需要将account相关信息放到sessionScope内
 
@@ -33,7 +33,7 @@ public class AccountController {
         Account account = accountService.getAccount(username, password);
             model.addAttribute("account", account);
             model.addAttribute("username", username);
-            model.addAttribute("exit", true);
+            model.addAttribute("authenticated", true);
             return "catalog/main";
     }
 
@@ -41,7 +41,7 @@ public class AccountController {
     public String viewSignOff(Model model) {
         Account account = new Account();
         model.addAttribute("account", account);
-        model.addAttribute("exit", false);
+        model.addAttribute("authenticated", false);
         return "catalog/main";
     }
 
@@ -80,7 +80,7 @@ public class AccountController {
 
         account = accountService.getAccount(account.getUsername(), account.getPassword());
         model.addAttribute("account", account);
-        model.addAttribute("exit", true);
+        model.addAttribute("authenticated", true);
 
 
         return "catalog/main";

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Mypetstore</title>
     <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen" />
 </head>
 <body>
@@ -11,7 +11,7 @@
 
             <div id="Logo">
                 <div id="LogoContent">
-                    <a href="/catalog/view"><img src="../images/logo-topbar.gif" /></a>
+                    <a href="/catalog/viewMain"><img src="../images/logo-topbar.gif" /></a>
                 </div>
             </div>
 
@@ -29,12 +29,12 @@
 <!--                    一个在account非空但退出账号后显示-->
                     <a th:if="${session.account} == null" href="/account/viewSignOnForm">Sign In</a>
 
-                    <a th:if="(${session.account} != null) and (${!session.exit})" href="/account/viewSignOnForm">Sign In</a>
+                    <a th:if="(${session.account} != null) and (${!session.authenticated})" href="/account/viewSignOnForm">Sign In</a>
 
-                    <a th:if="(${session.account} !=null) and (${session.exit})" href="/account/viewSignOff">Sign Out</a>
-                    <img th:if="(${session.account} !=null) and (${session.exit})" align="middle" src="../images/separator.gif"/>
+                    <a th:if="(${session.account} !=null) and (${session.authenticated})" href="/account/viewSignOff">Sign Out</a>
+                    <img th:if="(${session.account} !=null) and (${session.authenticated})" align="middle" src="../images/separator.gif"/>
 
-                    <a th:if="(${session.account} !=null) and (${session.exit})" th:href="@{viewEditAccount?username=} + ${session.username}">My account</a>
+                    <a th:if="(${session.account} !=null) and (${session.authenticated})" th:href="@{/account/viewEditAccount?username=} + ${session.username}">My account</a>
 
                     <img align="middle"src="../images/separator.gif" />
 

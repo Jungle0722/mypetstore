@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @RequestMapping("/cart")
@@ -20,8 +21,6 @@ public class CartController {
     private Cart cart;
     @Autowired
     private CatalogService catalogService;
-
-    private int numberOfItems;
 
     @GetMapping("/viewCart")
     public String viewCart(Model model) {
@@ -43,12 +42,12 @@ public class CartController {
     }
 
     @GetMapping("/addItemToCart")
-    public String addItemToCart(String itemId, Model model) {
-        if(cart.containsItemId(itemId)){
-            cart.incrementQuantityByItemId(itemId);
+    public String addItemToCart(String workingItemId, Model model) {
+        if(cart.containsItemId(workingItemId)){
+            cart.incrementQuantityByItemId(workingItemId);
         }else{
-            boolean isInStock = catalogService.isItemInStock(itemId);
-            Item item = catalogService.getItem(itemId);
+            boolean isInStock = catalogService.isItemInStock(workingItemId);
+            Item item = catalogService.getItem(workingItemId);
             cart.addItem(item,isInStock);
         }
 
@@ -59,14 +58,15 @@ public class CartController {
         return "cart/cart";
     }
 
-    @GetMapping("/removeItem")
-    public String removeItem(String itemId, Model model) {
+    @GetMapping("/removeItemFromCart")
+    public String removeItem(String cartItem, Model model) {
 
-        Item item = cart.removeItemById(itemId);
+        Item item = cart.removeItemById(cartItem);
 
         model.addAttribute("cart", cart);
         model.addAttribute("cart.numberOfItems", cart.getNumberOfItems());
         model.addAttribute("cart.cartItems", cart.getCartItems());
         return "cart/cart";
     }
+
 }

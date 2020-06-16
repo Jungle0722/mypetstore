@@ -1,9 +1,7 @@
 package org.csu.mypetstore.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.csu.mypetstore.domain.*;
 import org.csu.mypetstore.service.CatalogService;
-import org.csu.mypetstore.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +18,8 @@ public class CatalogController {
     @Autowired
     private CatalogService catalogService;
 
-    @Autowired
-    private ItemService itemService;
-
-    @GetMapping("/view")
-    public String view(Model model) {
-        // 每个用户刚进入页面时未登录，故account为空
-        model.addAttribute("account", null);
+    @GetMapping("/viewMain")
+    public String view() {
         return "catalog/main";
     }
 
@@ -45,7 +38,7 @@ public class CatalogController {
     @GetMapping("/viewProduct")
     public String viewProduct(String productId, Model model) {
         Product product = catalogService.getProduct(productId);
-        List<Item> itemList = itemService.getItemListByProduct(productId);
+        List<Item> itemList = catalogService.getItemListByProduct(productId);
         model.addAttribute("product", product);
         model.addAttribute("itemList", itemList);
         return "catalog/product";
@@ -53,7 +46,7 @@ public class CatalogController {
 
     @GetMapping("/viewItem")
     public String viewItem(String itemId, Model model) {
-        Item item = itemService.getItem(itemId);
+        Item item = catalogService.getItem(itemId);
         // model内的数据只能维持在一个页面？
         Product product = item.getProduct();
         model.addAttribute("item", item);

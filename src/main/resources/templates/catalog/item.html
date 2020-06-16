@@ -18,7 +18,7 @@
 
     <table>
         <tr>
-            <td th:text="${product.description}">Description</td>
+            <td><img th:src="${product.img}"><label th:text="${product.description}">Description</label></td>
         </tr>
         <tr>
             <td><b th:text="${item.itemId}">Item ID</b></td>
@@ -26,16 +26,13 @@
         <tr>
             <td>
                 <b>
-                    <font size="4" th:text="${item.attribute1} +
-                ${item.attribute2} + ${item.attribute3} +
-                ${item.attribute4} + ${item.attribute5} +
-                ${product.name}">
+                    <font size="4" th:text="${item.attribute1} + ${product.name}">
                     </font>
                 </b>
             </td>
         </tr>
         <tr>
-            <td th:text="product.name">Product Name</td>
+            <td th:text="${product.name}">Product Name</td>
         </tr>
         <tr>
             <td>
@@ -43,17 +40,16 @@
                     Back ordered.
                 </label>
                 <label th:if="${item.quantity > 0}">
-                    <label th:text="${item.quantity}"></label><label> in stock.</label>
+                    <label th:text="${item.quantity} + @{ in stock.}"></label>
                 </label>
         </tr>
         <tr>
-            <td th:text="${item.listPrice}">Item Price</td>
+            <td th:text="@{$} + ${#numbers.formatDecimal(item.listPrice, 1, 2)}">Item Price</td>
         </tr>
 
         <tr>
             <td>
-                <a class="Button" href="#">Add to Cart</a>
-<!--                <a class="Button" href="addItemToCart?workingItemId=${sessionScope.item.itemId}">Add to Cart</a>-->
+                <a class="Button" th:href="@{/cart/addItemToCart?workingItemId=} + ${item.itemId}">Add to Cart</a>
             </td>
         </tr>
     </table>
