@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen" />
+</head>
+<body>
+<div th:replace="common/top">
+
+</div>
+<div id="Content">
+    <div id="Catalog">
+        <h2>订单管理</h2>
+
+                <form action="/order/searchOrder" method="post">
+                    <input type="text" name="orderId" placeholder="Order ID" id="orderId" size="14"/>
+
+                    <input type="submit" name="searchOrders" value="Search" />
+                </form>
+
+    </div>
+</div>
+
+<div th:replace="common/bottom">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen" />
+</head>
+<body>
+<div th:replace="common/top">
+
+</div>
+<div id="Content">
+    <div id="Catalog">
+        <h2>订单管理</h2>
+
+        <table>
+            <tr>
+                <th>Order ID</th>
+                <th>User ID</th>
+                <th>Order Date</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+
+            <tr th:each="order:${orderList}">
+                <td>
+                    <a th:href="'/order/newOrder?orderId='+${order.orderId}" th:text="${order.orderId}">orderId</a>
+                </td>
+
+                <td th:text="${order.username}">
+
+
+                <td th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm:ss')}">
+                <td><a class="Button" th:href="@{/order/deleteOrder?orderId=} + ${order.orderId}" th:text="Delete">删除</a></td>
+                <td><a class="Button" th:href="@{/order/editOrder?orderId=} + ${order.orderId}" th:text="Change">更改</a></td>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+<div th:replace="common/bottom">
+
+</div>
+
+</body>
+</html>

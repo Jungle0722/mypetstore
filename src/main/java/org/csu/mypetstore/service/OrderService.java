@@ -32,7 +32,7 @@ public class OrderService {
 
     @Transactional
     public void insertOrder(Order order) {
-        order.setOrderId(getNextId("ordernum"));
+        order.setOrderId(getNextId("ordernum") + 1);
         for (int i = 0; i < order.getLineItems().size(); i++) {
             LineItem lineItem = (LineItem) order.getLineItems().get(i);
             String itemId = lineItem.getItemId();
@@ -84,4 +84,13 @@ public class OrderService {
         return sequence.getNextId();
     }
 
+    public void deleteOrder(int orderId) {
+        orderMapper.deleteOrder(orderId);
+        orderMapper.deleteOrderStatus(orderId);
+    }
+
+    public void updateOrder(Order order) {
+        orderMapper.updateOrder(order);
+        orderMapper.updateOrderStatus(order);
+    }
 }

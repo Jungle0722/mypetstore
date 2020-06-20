@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen" />
+</head>
+<body>
+<div th:replace="common/top">
+
+</div>
+<div id="Catalog">
+
+    <form th:action="'/order/saveOrder?orderId='+${order.orderId}" method="post" th:object="${order}">
+
+        <table>
+            <th  colspan="2" th:text="${#dates.format(orderDate, 'yyyy-MM-dd HH:mm:ss')}">
+                Order Date
+            </th>
+            <tr>
+                <th colspan=2>Payment Details</th>
+            </tr>
+            <tr>
+                <td>Card Type:</td>
+                <td><select name="cardType" th:field="*{cardType}">
+                    <option value="Visa">Visa</option>
+                    <option value="MasterCard">MasterCard</option>
+                    <option value="American Express">American Express</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Card Number:</td>
+                <td ><input type="text" name="creditCard" th:field="*{creditCard}"/></td>
+            </tr>
+            <tr>
+                <td>Expiry Date (MM/YYYY):</td>
+
+                <td ><input type="text" name="expiryDate" th:field="*{expiryDate}"/></td>
+            </tr>
+            <tr>
+                <th colspan=2>Billing Address</th>
+            </tr>
+
+            <tr>
+                <td>First name:</td>
+                <td ><input type="text" name="billToFirstName" th:field="*{billToFirstName}"/></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td ><input type="text" name="billToLastName" th:field="*{billToLastName}"/></td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+
+                <td ><input type="text" name="billAddress1" th:field="*{billAddress1}"/></td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td ><input type="text" name="billAddress2" th:field="*{billAddress2}"/></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td ><input type="text" name="billCity" th:field="*{billCity}"/></td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td ><input type="text" name="billState" th:field="*{billState}"/></td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td><input type="text" name="billZip" th:field="*{billZip}"/></td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td><input type="text" name="billCountry" th:field="*{billCountry}"/></td>
+            </tr>
+
+            <tr>
+                <td colspan=2><checkbox name="shippingAddressRequired" />
+                    Ship to different address...</td>
+            </tr>
+
+
+
+        <tr>
+            <th colspan="2">Shipping Address</th>
+        </tr>
+        <tr>
+            <td>First name:</td>
+            <td><input type="text" name="shipToFirstName" th:field="*{shipToFirstName}"/></td>
+        </tr>
+        <tr>
+            <td>Last name:</td>
+            <td><input type="text" name="shipToLastName" th:field="*{shipToLastName}"/></td>
+        </tr>
+        <tr>
+            <td>Address 1:</td>
+            <td><input type="text" name="shipAddress1" th:field="*{shipAddress1}"/></td>
+        </tr>
+        <tr>
+            <td>Address 2:</td>
+            <td><input type="text" name="shipAddress2" th:field="*{shipAddress2}"/></td>
+        </tr>
+        <tr>
+            <td>City:</td>
+            <td><input type="text" name="shipCity" th:field="*{shipCity}"/></td>
+        </tr>
+        <tr>
+            <td>State:</td>
+            <td><input type="text" name="shipState" th:field="*{shipState}"/></td>
+        </tr>
+        <tr>
+            <td>Zip:</td>
+            <td><input type="text" name="shipZip" th:field="*{shipZip}"/></td>
+        </tr>
+        <tr>
+            <td>Country:</td>
+            <td><input type="text" name="shipCountry" th:field="*{shipCountry}"/></td>
+        </tr>
+        <tr>
+            <td>Courier:</td>
+            <td><input type="text" name="courier" th:field="*{courier}"/></td>
+        </tr>
+        <tr>
+            <td>Status:</td>
+            <td><input type="text" name="status" th:field="*{status}"/></td>
+        </tr>
+        <tr>
+            <th colspan="2" >LineItem List</th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total Cost</th>
+                    </tr>
+                    <tr th:each="lineItem:${order.lineItems}">
+                        <td>
+                            <a th:href="@{/catalog/viewItem?itemId=} + ${lineItem.itemId}" th:text="${lineItem.itemId}">
+                                ${lineItem.item.itemId}
+                            </a></td>
+                        <td th:if="${lineItem.item} != null">
+                            <span th:text="${lineItem.item.attribute1}" ></span>
+
+
+                        </td>
+
+                        <td th:text="${lineItem.quantity}">${lineItem.quantity}</td>
+
+                        <td th:text="'$'+${#numbers.formatDecimal(lineItem.unitPrice,1,2)}">
+
+                        <td th:text="'$'+${#numbers.formatDecimal(lineItem.total,1,2)}">
+                    </tr>
+
+                    <tr>
+                        <th colspan="5" th:text="' Total:$'+${#numbers.formatDecimal(order.totalPrice,1,2)}">
+                        </th>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        </table>
+        <input type="submit" name="saveOrder" value="Save Order Information" />
+
+    </form>
+
+</div>
+
+
+
+<div th:replace="common/bottom">
+
+</div>
+
+</body>
+</html>

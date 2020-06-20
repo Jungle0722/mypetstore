@@ -16,9 +16,7 @@
     <table>
         <tr>
             <th  colspan="2" th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm:ss')}">
-                Order #${sessionScope.order.orderId}
-                <!--                    ${#dates.format(coupon.receiveDayTime,'yyyy-mm-dd HH：mm：ss'}-->
-                <!--                    <fmt:formatDate value="${sessionScope.order.orderDate}" pattern="yyyy/MM/dd hh:mm:ss" />-->
+                Order
             </th>
         </tr>
         <tr>
@@ -133,8 +131,6 @@
                             </a></td>
                         <td th:if="${lineItem.item} != null">
                             <span th:text="${lineItem.item.attribute1}" ></span>
-
-
                         </td>
 
                         <td th:text="${lineItem.quantity}">${lineItem.quantity}</td>
@@ -152,8 +148,11 @@
             </td>
         </tr>
 
+        <a href="../index.jsp" class="Button">Pay</a>
     </table>
 </div>
+
+
 
 <div th:replace="common/bottom">
 

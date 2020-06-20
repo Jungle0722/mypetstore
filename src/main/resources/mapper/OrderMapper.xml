@@ -85,4 +85,43 @@
     INSERT INTO ORDERSTATUS (ORDERID, LINENUM, TIMESTAMP, STATUS)
     VALUES (#{orderId,jdbcType=NUMERIC}, #{orderId,jdbcType=NUMERIC}, #{orderDate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
   </insert>
+
+  <delete id="deleteOrder" parameterType="int">
+    DELETE FROM ORDERS WHERE ORDERID = #{value}
+  </delete>
+
+  <delete id="deleteOrderStatus" parameterType="int">
+    DELETE FROM ORDERSTATUS WHERE ORDERID = #{value}
+  </delete>
+
+  <update id="updateOrder" parameterType="Order">
+    UPDATE ORDERS SET
+        SHIPADDR1 = #{shipAddress1},
+        SHIPADDR2 = #{shipAddress2},
+        SHIPCITY = #{shipCity},
+        SHIPSTATE = #{shipState},
+        SHIPZIP = #{shipZip},
+        SHIPCOUNTRY = #{shipCountry},
+        BILLADDR1 = #{billAddress1},
+        BILLADDR2 = #{billAddress2},
+        BILLCITY = #{billCity},
+        BILLSTATE = #{billState},
+        BILLZIP = #{billZip},
+        BILLCOUNTRY = #{billCountry},
+        COURIER = #{courier},
+        BILLTOFIRSTNAME = #{billToFirstName},
+        BILLTOLASTNAME = #{billToLastName},
+        SHIPTOFIRSTNAME = #{shipToFirstName},
+        SHIPTOLASTNAME = #{shipToLastName},
+        CREDITCARD = #{creditCard},
+        EXPRDATE = #{expiryDate},
+        CARDTYPE = #{cardType}
+    WHERE ORDERID = #{orderId}
+  </update>
+
+  <update id="updateOrderStatus" parameterType="Order">
+    UPDATE ORDERSTATUS SET
+        STATUS = #{status}
+        WHERE ORDERID = #{orderId}
+  </update>
 </mapper>
